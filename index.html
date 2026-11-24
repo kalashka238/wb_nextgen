@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wildberries NextGen — Умный маркетплейс нового поколения</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Top Utility Bar -->
+  <div class="top-bar">
+    <div class="container top-bar__inner">
+      <div class="top-bar__left">
+        <button id="pvzBtn" class="pvz-trigger" type="button" aria-label="Выбрать пункт выдачи">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span id="pvzLabel">Москва, ул. Тверская, 18 (ПВЗ)</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <span class="top-bar__badge">Доставка завтра бесплатно</span>
+      </div>
+      <div class="top-bar__right">
+        <button id="walletToggleBtn" class="wallet-pill active" type="button" title="Включить или выключить скидку WB Кошелька">
+          <span class="wallet-pill__dot"></span>
+          <span>WB Кошелёк: <strong>−5%</strong></span>
+          <span id="walletStatusText" class="wallet-pill__status">Вкл</span>
+        </button>
+        <button id="themeToggleBtn" class="icon-btn" type="button" aria-label="Переключить тему" title="Светлая / Тёмная тема">
+          <svg id="themeIconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg id="themeIconMoon" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Sticky Header -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#catalog" class="brand" id="logoReset">
+        <div class="brand__logo">WB</div>
+        <div class="brand__text">
+          <span class="brand__name">WILDBERRIES</span>
+          <span class="brand__tag">NEXTGEN</span>
+        </div>
+      </a>
+
+      <div class="search-wrap">
+        <div class="search-box">
+          <svg class="search-box__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="searchInput" class="search-box__input" type="text" placeholder="Умный поиск: например, «наушники для бега» или «сыворотка»..." autocomplete="off">
+          <button id="clearSearchBtn" class="search-box__clear hidden" type="button" aria-label="Очистить поиск">✕</button>
+          <span class="search-box__ai-badge">AI</span>
+        </div>
+      </div>
+
+      <div class="header__actions">
+        <button id="favFilterBtn" class="action-btn" type="button">
+          <div class="action-btn__icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            <span id="favCountBadge" class="badge-count hidden">0</span>
+          </div>
+          <span class="action-btn__label">Избранное</span>
+        </button>
+
+        <button id="cartOpenBtn" class="action-btn action-btn--primary" type="button">
+          <div class="action-btn__icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+            <span id="cartCountBadge" class="badge-count hidden">0</span>
+          </div>
+          <span class="action-btn__label">Корзина</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- AI Prompt Chips -->
+    <div class="container ai-chips">
+      <span class="ai-chips__label">Быстрый AI-подбор:</span>
+      <button class="ai-chip" type="button" data-query="наушники">🎧 Беспроводные наушники</button>
+      <button class="ai-chip" type="button" data-query="кроссовки">👟 Кроссовки для бега</button>
+      <button class="ai-chip" type="button" data-query="часы">⌚ Умные часы</button>
+      <button class="ai-chip" type="button" data-query="сыворотка">✨ Уход за кожей</button>
+      <button class="ai-chip" type="button" data-query="колонка">🔊 Умный дом</button>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <!-- Next-Gen Bento Hero -->
+    <section class="hero-bento" aria-label="Главные предложения">
+      <div class="hero-card hero-card--main">
+        <img class="hero-card__img" src="assets/hero.jpg" alt="Коллекция электроники и аксессуаров Wildberries NextGen">
+        <div class="hero-card__overlay"></div>
+        <div class="hero-card__content">
+          <div class="hero-card__top">
+            <span class="pill-glow">WB КИБЕРНЕДЕЛЯ</span>
+            <span class="countdown" id="countdownTimer">04:18:45</span>
+          </div>
+          <h1 class="hero-card__title">Шопинг нового поколения с мгновенной выгодой</h1>
+          <p class="hero-card__subtitle">Персональные скидки до 55%, умный подбор и доставка в ПВЗ уже завтра.</p>
+          <div class="hero-card__cta-row">
+            <a href="#catalog" class="btn btn--magenta">Смотреть хиты</a>
+            <button id="promoCopyBtn" class="btn btn--glass" type="button">Промокод NEXTGEN10 (−10%)</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-bento__side">
+        <div class="bento-mini bento-mini--purple">
+          <span class="bento-mini__eyebrow">WB Кошелёк</span>
+          <h2 class="bento-mini__title">Дополнительная скидка −5% на всё</h2>
+          <p class="bento-mini__desc">Применяется автоматически при оплате кошельком.</p>
+          <button id="bentoWalletBtn" class="bento-mini__btn" type="button">Переключить статус</button>
+        </div>
+        <div class="bento-mini bento-mini--surface">
+          <span class="bento-mini__eyebrow">Экспресс-логистика</span>
+          <h2 class="bento-mini__title">Примерочные нового формата</h2>
+          <p class="bento-mini__desc">Бесплатный возврат и проверка электроники на месте.</p>
+          <button id="bentoPvzBtn" class="bento-mini__link" type="button">Выбрать ближайший ПВЗ →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category & Filter Toolbar -->
+    <section id="catalog" class="toolbar" aria-label="Фильтры и категории">
+      <div class="categories" id="categoryTabs" role="tablist">
+        <button class="cat-pill active" type="button" data-category="all">Все товары</button>
+        <button class="cat-pill" type="button" data-category="electronics">Электроника</button>
+        <button class="cat-pill" type="button" data-category="shoes">Обувь</button>
+        <button class="cat-pill" type="button" data-category="beauty">Красота</button>
+        <button class="cat-pill" type="button" data-category="home">Умный дом</button>
+      </div>
+
+      <div class="filters-right">
+        <label class="toggle-chip">
+          <input type="checkbox" id="discountOnlyCheck">
+          <span>Скидки от 30%</span>
+        </label>
+        <select id="sortSelect" class="sort-select" aria-label="Сортировка товаров">
+          <option value="popular">По популярности</option>
+          <option value="price-asc">Сначала дешевле</option>
+          <option value="price-desc">Сначала дороже</option>
+          <option value="rating">Высокий рейтинг</option>
+          <option value="discount">Максимальная скидка</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Results Header -->
+    <div class="results-meta">
+      <h2 id="catalogHeading" class="results-meta__title">Рекомендации для вас</h2>
+      <span id="resultsCount" class="results-meta__count">6 товаров</span>
+    </div>
+
+    <!-- Product Grid -->
+    <section id="productGrid" class="product-grid" aria-live="polite"></section>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="empty-state hidden">
+      <div class="empty-state__icon">🔍</div>
+      <h3>Ничего не нашлось</h3>
+      <p>Попробуйте изменить поисковый запрос или сбросить фильтры.</p>
+      <button id="resetFiltersBtn" class="btn btn--magenta" type="button">Сбросить всё</button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <div class="brand brand--footer">
+          <div class="brand__logo">WB</div>
+          <span class="brand__name">WILDBERRIES NEXTGEN</span>
+        </div>
+        <p class="footer__copy">Концепт-интерфейс маркетплейса нового поколения: HTML5 + CSS3 + Vanilla JS.</p>
+      </div>
+      <div class="footer__links">
+        <a href="#catalog">Каталог</a>
+        <button type="button" id="footerPvzBtn" class="footer__link-btn">Пункты выдачи</button>
+        <button type="button" id="footerCartBtn" class="footer__link-btn">Корзина</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Quick View Modal -->
+  <div id="productModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal__backdrop" data-close="productModal"></div>
+    <div class="modal__card modal__card--wide">
+      <button class="modal__close" type="button" data-close="productModal" aria-label="Закрыть">✕</button>
+      <div class="modal__product-layout">
+        <div class="modal__img-wrap">
+          <img id="modalImg" src="" alt="">
+          <span id="modalDiscount" class="discount-badge"></span>
+        </div>
+        <div class="modal__info">
+          <span id="modalBrand" class="modal__brand"></span>
+          <h2 id="modalTitle" class="modal__title"></h2>
+          <div class="modal__rating-row">
+            <span id="modalRating" class="rating-pill"></span>
+            <span id="modalReviews" class="muted-text"></span>
+          </div>
+          <p id="modalDesc" class="modal__desc"></p>
+          <div class="modal__variants">
+            <span class="variant-label">Вариант:</span>
+            <div id="modalVariantChips" class="variant-chips"></div>
+          </div>
+          <div class="modal__price-box">
+            <div class="modal__price-main">
+              <span id="modalPrice" class="price-now"></span>
+              <span id="modalOldPrice" class="price-old"></span>
+            </div>
+            <span id="modalWalletHint" class="wallet-note"></span>
+          </div>
+          <div class="modal__actions">
+            <button id="modalAddCartBtn" class="btn btn--magenta btn--full" type="button">Добавить в корзину</button>
+            <button id="modalFavBtn" class="btn btn--outline" type="button" aria-label="В избранное">♡</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PVZ Selector Modal -->
+  <div id="pvzModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="pvzModalTitle">
+    <div class="modal__backdrop" data-close="pvzModal"></div>
+    <div class="modal__card">
+      <button class="modal__close" type="button" data-close="pvzModal" aria-label="Закрыть">✕</button>
+      <h2 id="pvzModalTitle" class="modal__title">Выберите пункт выдачи</h2>
+      <p class="muted-text mb-16">От выбранного ПВЗ зависит точное время экспресс-доставки.</p>
+      <div id="pvzList" class="pvz-list"></div>
+    </div>
+  </div>
+
+  <!-- Cart Slide-Over Drawer -->
+  <div id="cartDrawer" class="drawer hidden" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+    <div class="drawer__backdrop" data-close="cartDrawer"></div>
+    <aside class="drawer__panel">
+      <div class="drawer__header">
+        <div>
+          <h2 id="cartTitle">Корзина</h2>
+          <span id="cartSubtitle" class="muted-text">0 товаров</span>
+        </div>
+        <button class="modal__close static" type="button" data-close="cartDrawer" aria-label="Закрыть корзину">✕</button>
+      </div>
+
+      <div id="cartItemsContainer" class="drawer__body"></div>
+
+      <div id="cartFooter" class="drawer__footer hidden">
+        <div class="promo-row">
+          <input id="promoInput" type="text" placeholder="Промокод (например, NEXTGEN10)">
+          <button id="applyPromoBtn" class="btn btn--outline btn--sm" type="button">Применить</button>
+        </div>
+        <div class="summary-rows">
+          <div class="summary-row">
+            <span>Товары</span>
+            <span id="summarySubtotal">0 ₽</span>
+          </div>
+          <div class="summary-row summary-row--accent" id="summaryPromoRow" style="display:none;">
+            <span>Промокод</span>
+            <span id="summaryPromoVal">−0 ₽</span>
+          </div>
+          <div class="summary-row">
+            <span>Доставка в ПВЗ</span>
+            <span class="text-green">Бесплатно</span>
+          </div>
+          <div class="summary-row summary-row--total">
+            <span>Итого</span>
+            <span id="summaryTotal">0 ₽</span>
+          </div>
+        </div>
+        <button id="checkoutBtn" class="btn btn--magenta btn--full" type="button">Заказать сейчас</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
